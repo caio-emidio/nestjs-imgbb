@@ -8,13 +8,13 @@ export class ImgbbController {
   constructor(private readonly imgbbService: ImgbbService) {}
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file')) // Intercepta o upload do arquivo
+  @UseInterceptors(FileInterceptor('file'))
   async uploadImage(@UploadedFile() file: Express.Multer.File): Promise<any> {
     if (!file) {
       throw new Error('Nenhum arquivo enviado!');
     }
 
-    const buffer = file.buffer; // Buffer do arquivo enviado
-    return this.imgbbService.uploadImage(buffer, {name: file.originalname});
+    const buffer = file.buffer; 
+    return this.imgbbService.uploadImage(buffer, {name: "teste2", expiration: 60});
   }
 }
