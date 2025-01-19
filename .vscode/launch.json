@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Watch Mode",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "program": "${workspaceRoot}/dist/main.js",
+      "restart": true,
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "env": {
+        "DEVELOPMENT": "true",
+        "ENVIRONMENT": "development"
+      },
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "npm: build",
+      "runtimeArgs": [
+        "nodemon",
+        "--inspect=9229"
+      ],
+      "sourceMaps": true,
+      "outFiles": [
+        "${workspaceRoot}/dist/**/*.js"
+      ]
+    },
+    {
+      "name": "Development",
+      "type": "node",
+      "request": "launch",
+      "args": [
+        "${workspaceRoot}/dist/main.js"
+      ],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "env": {
+        "DEVELOPMENT": "true",
+        "ENVIRONMENT": "development"
+      },
+      "envFile": "${workspaceFolder}/.env.dev",
+      "console": "integratedTerminal",
+      "preLaunchTask": "npm: build",
+    }
+  ]
+}
