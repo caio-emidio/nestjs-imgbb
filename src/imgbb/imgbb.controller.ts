@@ -15,6 +15,6 @@ export class ImgbbController {
     }
 
     const buffer = file.buffer; // Buffer do arquivo enviado
-    return this.imgbbService.uploadImage(buffer);
+    return this.imgbbService.uploadImage(buffer, {name: file.originalname});
   }
 }

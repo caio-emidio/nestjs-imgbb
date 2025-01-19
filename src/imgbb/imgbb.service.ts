@@ -14,7 +14,6 @@ export class ImgbbService {
   async uploadImage(image: Buffer, options?: {
     name?: string,
     expiration?: number,
-    type?: string,
   }): Promise<any> {
     const formData = new FormData();
     formData.append('key', this.apiKey);
@@ -22,7 +21,7 @@ export class ImgbbService {
 
     if (options?.name) formData.append('name', options.name);
     if (options?.expiration) formData.append('expiration', options.expiration.toString());
-    
+
     try {
       const response = await firstValueFrom(
         this.httpService.post('https://api.imgbb.com/1/upload', formData, {

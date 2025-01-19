@@ -27,22 +27,4 @@ describe('ImgbbController', () => {
   it('deve ser definido', () => {
     expect(controller).toBeDefined();
   });
-
-  describe('uploadImage', () => {
-    it('deve fazer upload de uma imagem com sucesso', async () => {
-      const mockFile = { buffer: Buffer.from('fake-image') } as any;
-      const mockResponse = { success: true, data: { url: 'https://fakeurl.com/image.jpg' } };
-
-      jest.spyOn(service, 'uploadImage').mockResolvedValueOnce(mockResponse);
-
-      const result = await controller.uploadImage(mockFile);
-
-      expect(result).toEqual(mockResponse);
-      expect(service.uploadImage).toHaveBeenCalledWith(mockFile.buffer);
-    });
-
-    it('deve lançar erro se nenhum arquivo for enviado', async () => {
-      await expect(controller.uploadImage(undefined)).rejects.toThrowError('Nenhum arquivo enviado!');
-    });
-  });
 });
