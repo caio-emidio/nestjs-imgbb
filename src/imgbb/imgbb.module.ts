@@ -4,6 +4,11 @@ import { ImgbbService } from './imgbb.service';
 import { ImgbbController } from './imgbb.controller';
 import { HttpModule } from '@nestjs/axios';
 
+@Module({
+    imports: [HttpModule],
+    providers: [ImgbbService],
+    exports: [ImgbbService], // Certifique-se de exportar o serviço aqui
+  })
 export class ImgbbModule {
     static forRoot(apiKey: string): DynamicModule {
         return {
