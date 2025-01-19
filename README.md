@@ -1,4 +1,3 @@
-
 # Imgbb-NestJS
 
 A NestJS module to easily integrate the [ImgBB API](https://imgbb.com/) for uploading images to ImgBB and retrieving the URLs of the uploaded images.
@@ -40,11 +39,6 @@ To use the `imgbb-nestjs` module in your NestJS project, follow these steps:
      imports: [
        ImgbbModule.forRoot({
          apiKey: 'YOUR_IMGBB_API_KEY',
-         options: {
-           // Additional options, if needed (e.g., image size, expiration)
-           maxSize: 10 * 1024 * 1024,  // Max file size in bytes (e.g., 10MB)
-           expiration: 3600,  // Expiration time for the image link (in seconds)
-         },
        }),
      ],
    })
@@ -60,7 +54,12 @@ Once the module is set up, you can use it in your controllers.
 ### Example Controller
 
 ```typescript
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImgbbService } from 'imgbb-nestjs';
 
@@ -75,7 +74,37 @@ export class AppController {
       throw new Error('No image uploaded');
     }
 
-    const result = await this.imgbbService.uploadImage(file.buffer);
+    const result = await this.imgbbService.uploadImage(file.buffer, {});
+    return result;
+  }
+}
+```
+
+```typescript
+import {
+  Controller,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ImgbbService } from 'imgbb-nestjs';
+
+@Controller()
+export class AppController {
+  constructor(private readonly imgbbService: ImgbbService) {}
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('image'))
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+    if (!file) {
+      throw new Error('No image uploaded');
+    }
+    const options = {
+      name: 'Custom Image Name', 
+      expiration: 3600, // 1 hour (3600 seconds)
+    };
+    const result = await imgbbService.uploadImage(imageBuffer, options);
     return result;
   }
 }
@@ -106,4 +135,7 @@ The `ImgbbModule.forRoot()` method accepts the following options:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+
 ```

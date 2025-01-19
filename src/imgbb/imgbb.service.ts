@@ -22,7 +22,6 @@ export class ImgbbService {
 
     if (options?.name) formData.append('name', options.name);
     if (options?.expiration) formData.append('expiration', options.expiration.toString());
-    if (options?.type) formData.append('type', options.type);
     
     try {
       const response = await firstValueFrom(
