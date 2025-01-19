@@ -12,7 +12,6 @@ import { HttpModule } from '@nestjs/axios';
 export class ImgbbModule {
     static forRoot(apiKey: string): DynamicModule {
         return {
-
             module: ImgbbModule,
             imports: [HttpModule],
             controllers: [ImgbbController],
