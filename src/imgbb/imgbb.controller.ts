@@ -15,6 +15,6 @@ export class ImgbbController {
     }
 
     const buffer = file.buffer; 
-    return this.imgbbService.uploadImage(buffer, {name: "teste2", expiration: 60});
+    return this.imgbbService.uploadImage(buffer);
   }
 }
