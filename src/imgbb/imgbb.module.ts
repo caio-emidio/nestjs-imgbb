@@ -1,5 +1,5 @@
 // src/imgbb/imgbb.module.ts
-import { Module, DynamicModule, ModuleMetadata, Provider } from '@nestjs/common';
+import { Module, DynamicModule, ModuleMetadata, Provider, Type } from '@nestjs/common';
 import { ImgbbService } from './imgbb.service';
 import { ImgbbController } from './imgbb.controller';
 import { HttpModule } from '@nestjs/axios';
@@ -35,7 +35,7 @@ export class ImgbbModule {
         const asyncProviders = this.createAsyncProviders(options);
         return {
             module: ImgbbModule,
-            imports: options.imports || [],
+            imports: options.imports as Type<any>[] || [],
             controllers: [ImgbbController],
             providers: [
                 ...asyncProviders,
