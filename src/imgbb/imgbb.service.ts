@@ -15,14 +15,14 @@ export class ImgbbService {
     const formData = new FormData();
     formData.append('key', this.apiKey);
     formData.append('image', image.toString('base64'));
+    
+    // if (options?.name) {
+    //   formData.append('name', options.name);
+    // }
 
-    if (options?.name) {
-      formData.append('name', options.name);
-    }
-
-    if (options?.expiration) {
-      formData.append('expiration', options.expiration.toString());
-    }
+    // if (options?.expiration) {
+    //   formData.append('expiration', options.expiration.toString());
+    // }
 
     try {
       const response = await firstValueFrom(
