@@ -11,7 +11,7 @@ export class ImgbbService {
     private readonly httpService: HttpService
   ) {}
 
-  async uploadImage(image: Buffer, options?: {name?: string, expiration?: number}): Promise<any> {
+  async uploadImage(image: Buffer ): Promise<any> {
     const formData = new FormData();
     formData.append('key', this.apiKey);
     formData.append('image', image.toString('base64'));
